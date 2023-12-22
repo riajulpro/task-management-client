@@ -10,7 +10,7 @@ import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
 import NonLogged from "./NonLogged";
 import DashboardHome from "../pages/private/DashboardHome";
-import AllTasks from "../pages/private/AllTasks";
+import AddTask from "../pages/private/AddTask";
 
 const router = createBrowserRouter([
   {
@@ -62,11 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: "add-task",
-        element: <DashboardHome />,
-      },
-      {
-        path: "all-tasks",
-        element: <AllTasks />,
+        element: <AddTask />,
       },
     ],
   },

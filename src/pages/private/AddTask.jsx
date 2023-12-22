@@ -1,5 +1,11 @@
+import TaskForm from "../../components/shared/task/TaskForm";
+
 const AddTask = () => {
-  return <div></div>;
+  return (
+    <div>
+      <TaskForm />
+    </div>
+  );
 };
 
 export default AddTask;

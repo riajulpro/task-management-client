@@ -2,7 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../context/Authentication";
 import { useContext, useState } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
