@@ -9,6 +9,8 @@ import Dashboard from "../pages/private/Dashboard";
 import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
 import NonLogged from "./NonLogged";
+import DashboardHome from "../pages/private/DashboardHome";
+import AllTasks from "../pages/private/AllTasks";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,20 @@ const router = createBrowserRouter([
         <Dashboard />
       </Private>
     ),
+    children: [
+      {
+        index: true,
+        element: <DashboardHome />,
+      },
+      {
+        path: "add-task",
+        element: <DashboardHome />,
+      },
+      {
+        path: "all-tasks",
+        element: <AllTasks />,
+      },
+    ],
   },
 ]);
 

@@ -1,49 +1,91 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import { AuthContext } from "../../context/Authentication";
+import { useContext, useState } from "react";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
+  const navigateTo = useNavigate();
+  const location = useLocation();
+
+  const googleLogin = () => {
+    googleSignIn()
+      .then((res) => {
+        console.log("Successfully Logged in", res.user);
+        navigateTo(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const { register, handleSubmit } = useForm();
+
+  const login = (data) => {
+    signIn(data.email, data.password)
+      .then(() => {
+        Swal.fire(
+          "You have successfully login!",
+          "Now you can access all features.",
+          "success"
+        );
+        navigateTo(location.state ? location.state : "/");
+      })
+      .catch(() => {
+        setLoginError("Invalid email or password");
+      });
+  };
+
   return (
     <div className="bg-gray-200 h-screen flex justify-center items-center">
-      <div>
-        <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body">
-            <div className="font-semibold text-lg">Login Now</div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                className="input input-bordered"
-                required
-              />
+      <div className="w-11/12 md:w-1/4 p-5 bg-base-100 rounded-lg shadow-lg">
+        {loginError && <div>{loginError}</div>}
+        <form className="w-full" onSubmit={handleSubmit(login)}>
+          <div className="font-semibold text-lg">Login Now</div>
+
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Email:</span>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                required
-              />
+            <input
+              name="email"
+              {...register("email")}
+              placeholder="enter your email"
+              className="input input-bordered w-full"
+            />
+          </label>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Password:</span>
             </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
-            <div className="text-center">
-              Don&apos;t have an account?{" "}
-              <Link className="text-primary" to="/register">
-                Register
-              </Link>
-            </div>
-            <button className="bg-gray-100 rounded-full p-2 text-sm flex justify-center gap-5 m-5 items-center hover:text-[#34A853] border hover:border-[#34A853] duration-150">
-              <FaGoogle /> <span>Login with Google</span>
-            </button>
-          </form>
-        </div>
+            <input
+              name="password"
+              {...register("password")}
+              placeholder="enter your password"
+              className="input input-bordered w-full"
+            />
+          </label>
+
+          <div className="form-control mt-5">
+            <button className="btn btn-primary">Login</button>
+          </div>
+          <div className="text-center my-5">
+            Don&apos;t have an account?{" "}
+            <Link className="text-primary" to="/register">
+              Register
+            </Link>
+          </div>
+        </form>
+        <button
+          onClick={googleLogin}
+          className="bg-gray-100 rounded-full p-2 text-sm flex justify-center gap-5 items-center hover:text-[#34A853] border hover:border-[#34A853] duration-150 w-full"
+        >
+          <FaGoogle /> <span>Login with Google</span>
+        </button>
       </div>
     </div>
   );
