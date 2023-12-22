@@ -30,7 +30,7 @@ const TaskBar = ({ task, refetch }) => {
   const deleteTheTask = async (data) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/tasks/${task._id}`
+        `https://rp-task-m.vercel.app/tasks/${task._id}`
       );
 
       // Show success toast

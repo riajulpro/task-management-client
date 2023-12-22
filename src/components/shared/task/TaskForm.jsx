@@ -11,7 +11,10 @@ const TaskForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3000/tasks", data);
+      const response = await axios.post(
+        "https://rp-task-m.vercel.app/tasks",
+        data
+      );
 
       // Show success toast
       toast.success("Task submitted successfully");

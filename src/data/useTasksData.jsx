@@ -13,7 +13,7 @@ const useTasksData = () => {
     queryKey: ["tasks"],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/tasks`);
+        const response = await axios.get(`https://rp-task-m.vercel.app/tasks`);
         return response.data.data || null;
       } catch (error) {
         console.error("Error fetching user data:", error);

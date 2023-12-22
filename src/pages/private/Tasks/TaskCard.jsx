@@ -33,7 +33,7 @@ const TaskCard = ({ task, refetch }) => {
 
   const handleDeleteTask = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:3000/tasks/${id}`).then((data) => {
+    axios.delete(`https://rp-task-m.vercel.app/tasks/${id}`).then((data) => {
       console.log(data.data);
       refetch();
       if (data.data.deletedCount > 0) {
@@ -66,7 +66,7 @@ const TaskCard = ({ task, refetch }) => {
     };
 
     axios
-      .post("http://localhost:3000/tasks", newTask)
+      .post("https://rp-task-m.vercel.app/tasks", newTask)
       .then((res) => {
         console.log(res.data);
         refetch();

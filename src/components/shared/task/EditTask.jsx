@@ -4,7 +4,7 @@ import { AuthContext } from "../../../context/Authentication";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const EditTask = ({ task , refetch}) => {
+const EditTask = ({ task, refetch }) => {
   const { handleSubmit, register, reset, control, setValue } = useForm();
 
   const { user } = useContext(AuthContext);
@@ -12,7 +12,7 @@ const EditTask = ({ task , refetch}) => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/tasks/${task._id}`,
+        `https://rp-task-m.vercel.app/tasks/${task._id}`,
         data
       );
 
