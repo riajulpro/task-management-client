@@ -36,6 +36,8 @@ const TaskBar = ({ task, refetch }) => {
       // Show success toast
       toast.success("Task deleted successfully");
 
+      refetch();
+
       console.log("Task deleted successfully:", response.data);
     } catch (error) {
       // Show error toast
